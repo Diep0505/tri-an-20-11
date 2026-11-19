@@ -515,6 +515,7 @@
       width: min(760px, 98vw);
       height: 86vh;
       --bouquet-scale: 0.6885;
+      --bouquet-raise: 0px;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -523,8 +524,8 @@
     }
 
     @keyframes bouquet-breathe {
-      0%, 100% { transform: translateY(0) scale(var(--bouquet-scale, 0.9)); }
-      50% { transform: translateY(-4px) scale(var(--bouquet-scale, 0.9)); }
+      0%, 100% { transform: translateY(calc(var(--bouquet-raise, 0px) + 0px)) scale(var(--bouquet-scale, 0.9)); }
+      50% { transform: translateY(calc(var(--bouquet-raise, 0px) - 4px)) scale(var(--bouquet-scale, 0.9)); }
     }
 
     /* --- 6A. GIẤY GÓI HOA NGHỆ THUẬT NHIỀU TẦNG (LAYERED WRAPPING PAPER) --- */
@@ -1681,19 +1682,20 @@
       }
 
       .school-backdrop {
-        bottom: 12vh;
-        width: 118vw;
+        bottom: 22vh;
+        width: 146vw;
       }
 
       .school-svg {
-        --school-height-scale: 1.28;
-        height: clamp(210px, 32vh, 290px);
-        max-height: 44vh;
+        --school-height-scale: 1.22;
+        height: clamp(300px, 43vh, 390px);
+        max-height: 52vh;
       }
 
       .bouquet-wrapper {
-        --bouquet-scale: 0.48;
-        height: 72vh;
+        --bouquet-scale: 0.72;
+        --bouquet-raise: -17vh;
+        height: 82vh;
       }
 
       .lanterns-layer {
@@ -1723,7 +1725,7 @@
       }
 
       .control-dock {
-        bottom: 8px;
+        bottom: calc(8px + env(safe-area-inset-bottom, 0px));
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         width: calc(100vw - 12px);
@@ -2774,13 +2776,14 @@
       function initInitialSkyLanterns() {
         const themeKeys = Object.keys(LANTERN_THEMES);
         const depths = ["far", "mid", "near", "far", "mid", "near"];
+        const initialLanternCount = window.innerWidth <= 600 ? 12 : 18;
 
-        for (let i = 0; i < 18; i++) {
+        for (let i = 0; i < initialLanternCount; i++) {
           const wish = AUTO_WISHES[i % AUTO_WISHES.length];
           const depth = depths[i % depths.length];
           const theme = themeKeys[i % themeKeys.length];
           // Phân bố đều theo chiều ngang (6% -> 92%) và chiều cao (16vh -> 84vh)
-          const leftPct = 6 + ((i * 86) / 18) + (Math.random() * 4 - 2);
+          const leftPct = 6 + ((i * 86) / initialLanternCount) + (Math.random() * 4 - 2);
           const bottomVh = 16 + ((i % 6) * 12.5) + Math.random() * 5;
 
           releaseLantern({
@@ -2795,7 +2798,7 @@
             incrementCounter: false
           });
         }
-        totalLanternsReleased = 18;
+        totalLanternsReleased = initialLanternCount;
         lanternCountEl.textContent = totalLanternsReleased;
         if (mobileLanternCountEl) mobileLanternCountEl.textContent = totalLanternsReleased;
         autoWishCursor = 18;
