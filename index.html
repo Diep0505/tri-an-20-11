@@ -184,7 +184,7 @@
        ========================================================================== */
     .school-backdrop {
       position: fixed;
-      bottom: 5vh;
+      bottom: -3vh;
       left: 50%;
       transform: translateX(-50%);
       width: min(1400px, 118vw);
@@ -212,9 +212,11 @@
     .school-svg {
       width: 100%;
       height: auto;
-      max-height: 89vh;
+      height: clamp(360px, 64vh, 720px);
+      max-height: 92vh;
       overflow: visible;
-      transform: scaleY(1.4);
+      --school-height-scale: 1.4;
+      transform: scaleY(var(--school-height-scale));
       transform-origin: bottom center;
     }
 
@@ -252,7 +254,7 @@
 
     /* Lá cờ đỏ sao vàng tung bay trên sân trường */
     .school-flag-wave {
-      transform-origin: 452px 117px;
+      transform-origin: 452px 105px;
       animation: flag-flutter 3.2s ease-in-out infinite;
     }
 
@@ -357,7 +359,18 @@
       border: 1px solid rgba(255, 213, 79, 0.28);
       backdrop-filter: blur(14px);
       box-shadow: 0 12px 34px rgba(0, 0, 0, 0.55);
-      animation: fade-up 1.2s ease-out 0.5s both;
+      animation: control-dock-enter 1.2s ease-out 0.5s both;
+    }
+
+    @keyframes control-dock-enter {
+      from {
+        opacity: 0;
+        transform: translate(-50%, 18px);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
     }
 
     @keyframes fade-up {
@@ -497,7 +510,7 @@
       position: relative;
       width: min(760px, 98vw);
       height: 86vh;
-      --bouquet-scale: 0.9;
+      --bouquet-scale: 0.6885;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -1550,12 +1563,18 @@
        ========================================================================== */
     @media (max-width: 900px) {
       .bouquet-wrapper {
-        --bouquet-scale: 0.774;
+        --bouquet-scale: 0.5921;
       }
 
       .school-backdrop {
-        bottom: 9vh;
+        bottom: 27vh;
         width: 132vw;
+      }
+
+      .school-svg {
+        --school-height-scale: 2;
+        height: clamp(220px, 34vh, 360px);
+        max-height: 78vh;
       }
 
       .control-dock {
@@ -1601,6 +1620,35 @@
         right: 12px;
         left: 12px;
         width: auto;
+      }
+    }
+
+    @media (min-width: 901px) and (max-height: 800px) {
+      .school-backdrop {
+        bottom: -5vh;
+      }
+
+      .school-svg {
+        --school-height-scale: 1.55;
+        height: clamp(300px, 60vh, 520px);
+        max-height: 82vh;
+      }
+    }
+
+    @media (min-width: 901px) and (min-height: 801px) and (max-height: 1100px) {
+      .school-svg {
+        --school-height-scale: 1.48;
+      }
+    }
+
+    @media (min-width: 901px) and (min-height: 1101px) {
+      .school-backdrop {
+        bottom: -1vh;
+      }
+
+      .school-svg {
+        --school-height-scale: 1.55;
+        max-height: 92vh;
       }
     }
   </style>
@@ -1803,12 +1851,12 @@
         <rect class="school-window-glow" x="576" y="256" width="48" height="48" rx="6" fill="url(#warmWindowGrad)" filter="url(#schoolGlowFilter)" />
 
         <!-- Cột cờ cao trên sân trường & Lá cờ đỏ sao vàng tung bay -->
-        <line x1="452" y1="115" x2="452" y2="420" stroke="#eceff1" stroke-width="2.4" />
-        <circle cx="452" cy="113" r="3" fill="#ffd54f" />
+        <line x1="452" y1="103" x2="452" y2="420" stroke="#eceff1" stroke-width="2.4" />
+        <circle cx="452" cy="101" r="3" fill="#ffd54f" />
         <g class="school-flag-wave">
-          <rect x="452" y="115" width="42" height="27" rx="2" fill="#d32f2f" />
+          <rect x="452" y="103" width="42" height="27" rx="2" fill="#d32f2f" />
           <polygon
-            points="473,121 475.5,127 482,127 477,131 479,137 473,133.5 467,137 469,131 464,127 470.5,127"
+            points="473,109 475.5,115 482,115 477,119 479,125 473,121.5 467,125 469,119 464,115 470.5,115"
             fill="#ffd54f"
           />
         </g>
