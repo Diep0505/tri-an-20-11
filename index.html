@@ -212,8 +212,10 @@
     .school-svg {
       width: 100%;
       height: auto;
-      max-height: 64vh;
+      max-height: 89vh;
       overflow: visible;
+      transform: scaleY(1.4);
+      transform-origin: bottom center;
     }
 
     .school-interactive-target {
@@ -250,7 +252,7 @@
 
     /* Lá cờ đỏ sao vàng tung bay trên sân trường */
     .school-flag-wave {
-      transform-origin: 452px 232px;
+      transform-origin: 452px 117px;
       animation: flag-flutter 3.2s ease-in-out infinite;
     }
 
@@ -336,13 +338,19 @@
        ========================================================================== */
     .control-dock {
       position: fixed;
-      right: 18px;
+      left: 50%;
       bottom: 18px;
       z-index: 36;
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
       gap: 9px;
+      width: max-content;
+      max-width: calc(100vw - 36px);
       padding: 12px;
+      transform: translateX(-50%);
       border-radius: 20px;
       background: rgba(10, 17, 38, 0.68);
       border: 1px solid rgba(255, 213, 79, 0.28);
@@ -488,6 +496,7 @@
       position: relative;
       width: min(760px, 98vw);
       height: 86vh;
+      --bouquet-scale: 0.9;
       display: flex;
       align-items: flex-end;
       justify-content: center;
@@ -496,8 +505,8 @@
     }
 
     @keyframes bouquet-breathe {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
+      0%, 100% { transform: translateY(0) scale(var(--bouquet-scale, 0.9)); }
+      50% { transform: translateY(-4px) scale(var(--bouquet-scale, 0.9)); }
     }
 
     /* --- 6A. GIẤY GÓI HOA NGHỆ THUẬT NHIỀU TẦNG (LAYERED WRAPPING PAPER) --- */
@@ -549,8 +558,8 @@
       width: 32vmin;
       height: 46vmin;
       border-radius: 38% 38% 20% 20%;
-      border: 2px solid rgba(255, 213, 79, 0.72);
-      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.55);
+      border: 0;
+      box-shadow: none;
     }
 
     .wrap-sheet-side--left {
@@ -835,7 +844,7 @@
         linear-gradient(to top, #145a32, #2e7d32, #66bb6a);
       box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
       border-radius: 1vmin;
-      animation: grow-flower-tree 2.8s var(--grow-delay, 0.1s) backwards;
+      animation: grow-flower-tree 2.2s 0.2s backwards;
     }
 
     .flower__line__leaf {
@@ -854,7 +863,7 @@
 
     .flower__line__leaf--1 {
       transform: rotate(68deg) rotateY(28deg);
-      animation: blooming-leaf-right var(--fl-speed) calc(var(--grow-delay, 0.1s) + 1s) backwards;
+      animation: blooming-leaf-right var(--fl-speed) 1.25s backwards;
     }
 
     .flower__line__leaf--2 {
@@ -865,14 +874,14 @@
       left: -420%;
       top: 18%;
       transform: rotate(-68deg) rotateY(28deg);
-      animation: blooming-leaf-left var(--fl-speed) calc(var(--grow-delay, 0.1s) + 0.9s) backwards;
+      animation: blooming-leaf-left var(--fl-speed) 1.25s backwards;
     }
 
     /* Cụm cánh hoa nở đa tầng */
     .flower__leafs {
       position: relative;
       transform: scale(var(--bloom-scale, 1));
-      animation: blooming-flower 1.7s calc(var(--grow-delay, 0.1s) + 0.7s) backwards;
+      animation: blooming-flower 1.35s 1.45s backwards;
     }
 
     .flower__leafs::after {
@@ -1000,7 +1009,7 @@
       border-radius: 50%;
       filter: blur(0.12vmin);
       box-shadow: 0 0 0.9vmin #ffb300;
-      animation: light-ans 4s linear infinite backwards;
+      animation: light-ans 4s 1.9s linear infinite backwards;
       pointer-events: none;
     }
 
@@ -1009,12 +1018,12 @@
       box-shadow: 0 0 0.9vmin var(--mint-glow);
     }
 
-    .flower__light--1 { left: -2vmin; animation-delay: 0.6s; }
-    .flower__light--2 { left: 2.5vmin; animation-delay: 0.2s; }
-    .flower__light--3 { left: -4vmin; animation-delay: 1.3s; }
-    .flower__light--4 { left: 4vmin; animation-delay: 0.9s; }
-    .flower__light--5 { left: -1vmin; animation-delay: 2s; }
-    .flower__light--6 { left: 1.6vmin; animation-delay: 2.6s; }
+    .flower__light--1 { left: -2vmin; }
+    .flower__light--2 { left: 2.5vmin; }
+    .flower__light--3 { left: -4vmin; }
+    .flower__light--4 { left: 4vmin; }
+    .flower__light--5 { left: -1vmin; }
+    .flower__light--6 { left: 1.6vmin; }
 
     /* Tán lá dương xỉ & bạc hà xanh ngọc xòe quanh bó hoa */
     .bouquet-foliage {
@@ -1038,6 +1047,8 @@
       background: linear-gradient(to top, #0d6e75, var(--teal-leaf), var(--mint-glow));
       border-radius: 1vmin;
       position: relative;
+      transform-origin: bottom center;
+      animation: grow-flower-tree 2.2s 0.2s backwards;
     }
 
     .fern-leaflet {
@@ -1048,6 +1059,7 @@
       border-radius: 100% 0 100% 0;
       opacity: 0.85;
       box-shadow: 0 0 0.8vmin rgba(35, 240, 255, 0.35);
+      animation: foliage-leaf-unfold 0.8s 1.25s backwards;
     }
 
     .fern-leaflet--l {
@@ -1084,6 +1096,10 @@
         transform-origin: right;
         transform: rotate(-68deg) rotateY(28deg) scale(0);
       }
+    }
+
+    @keyframes foliage-leaf-unfold {
+      0% { transform: scale(0); }
     }
 
     @keyframes light-ans {
@@ -1220,11 +1236,6 @@
       padding: 4px 8px;
     }
 
-    .sky-lantern--mid .lantern-ribbon__msg {
-      -webkit-line-clamp: 1;
-      font-size: 10px;
-    }
-
     @keyframes ribbon-sway {
       0%, 100% { transform: rotate(2.5deg); }
       50% { transform: rotate(-2.5deg); }
@@ -1234,17 +1245,14 @@
       font-size: 11px;
       line-height: 1.35;
       color: #fffdf7;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
+      white-space: nowrap;
       overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 700;
     }
 
     .lantern-ribbon__sender {
-      margin-top: 2px;
-      font-size: 9.5px;
-      font-weight: 600;
-      color: #ffd54f;
+      display: none;
     }
 
     /* ==========================================================================
@@ -1541,7 +1549,7 @@
        ========================================================================== */
     @media (max-width: 900px) {
       .bouquet-wrapper {
-        transform: scale(0.86);
+        --bouquet-scale: 0.774;
       }
 
       .school-backdrop {
@@ -1550,9 +1558,10 @@
       }
 
       .control-dock {
-        right: 50%;
+        left: 50%;
+        right: auto;
         bottom: 10px;
-        transform: translateX(50%);
+        transform: translateX(-50%);
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
@@ -1793,12 +1802,12 @@
         <rect class="school-window-glow" x="576" y="256" width="48" height="48" rx="6" fill="url(#warmWindowGrad)" filter="url(#schoolGlowFilter)" />
 
         <!-- Cột cờ cao trên sân trường & Lá cờ đỏ sao vàng tung bay -->
-        <line x1="452" y1="228" x2="452" y2="420" stroke="#eceff1" stroke-width="2.4" />
-        <circle cx="452" cy="226" r="3" fill="#ffd54f" />
+        <line x1="452" y1="115" x2="452" y2="420" stroke="#eceff1" stroke-width="2.4" />
+        <circle cx="452" cy="113" r="3" fill="#ffd54f" />
         <g class="school-flag-wave">
-          <rect x="452" y="230" width="42" height="27" rx="2" fill="#d32f2f" />
+          <rect x="452" y="115" width="42" height="27" rx="2" fill="#d32f2f" />
           <polygon
-            points="473,236 475.5,242 482,242 477,246 479,252 473,248.5 467,252 469,246 464,242 470.5,242"
+            points="473,121 475.5,127 482,127 477,131 479,137 473,133.5 467,137 469,131 464,127 470.5,127"
             fill="#ffd54f"
           />
         </g>
@@ -1835,8 +1844,6 @@
     <div class="bouquet-wrapper" id="bouquet-wrapper">
       <!-- Tầng giấy gói hoa phía sau (Kraft kem ánh vàng đồng + lụa xanh than & đỏ đô) -->
       <div class="bouquet-wrap-back" aria-hidden="true">
-        <div class="wrap-sheet-side wrap-sheet-side--left"></div>
-        <div class="wrap-sheet-side wrap-sheet-side--right"></div>
         <div class="wrap-sheet-center"></div>
         <div class="wrap-sheet-inner-crimson"></div>
       </div>
@@ -1866,8 +1873,8 @@
   <!-- ========================================================================
        6. THANH CÔNG CỤ KÍNH MỜ GỌN GÀNG Ở GÓC MÀN HÌNH (KHÔNG CHE BÓ HOA)
        ======================================================================== -->
-  <!-- Góc dưới bên trái: Bộ đếm đèn & nút tương tác nhanh với ngôi trường -->
-  <div class="left-status-dock">
+  <!-- Thanh action bar gọn bên dưới, gồm tương tác nhanh & số đèn tri ân -->
+  <nav class="control-dock" aria-label="Bảng điều khiển tri ân 20/11">
     <button type="button" class="status-pill status-pill--interactive" id="school-pill-btn">
       <span>🏫</span>
       <span>Chạm ánh đèn mái trường</span>
@@ -1876,10 +1883,6 @@
       <span class="lantern-counter-dot"></span>
       <span>Đã thắp <strong id="lantern-count">18</strong> đèn tri ân</span>
     </div>
-  </div>
-
-  <!-- Góc dưới bên phải: 4 nút chức năng chính -->
-  <nav class="control-dock" aria-label="Bảng điều khiển tri ân 20/11">
     <button type="button" class="btn-tribute btn-tribute--primary" id="btn-auto-lantern">
       <span>🏮</span>
       <span>Thả Đèn Tri Ân</span>
@@ -2273,47 +2276,7 @@
         const container = document.getElementById("flowers-cluster");
         const fragment = document.createDocumentFragment();
 
-        // 1. Tán lá dương xỉ & bạc hà xanh ngọc xòe quanh bó hoa từ nút thắt nơ
-        const foliageConfig = [
-          { rot: -42, height: "39vmin" },
-          { rot: -33, height: "48vmin" },
-          { rot: -22, height: "54vmin" },
-          { rot: -8,  height: "57vmin" },
-          { rot: 8,   height: "57vmin" },
-          { rot: 22,  height: "54vmin" },
-          { rot: 33,  height: "48vmin" },
-          { rot: 42,  height: "39vmin" }
-        ];
-
-        foliageConfig.forEach((f) => {
-          const fWrap = document.createElement("div");
-          fWrap.className = "bouquet-foliage";
-          fWrap.style.setProperty("--f-rot", `${f.rot}deg`);
-          fWrap.style.setProperty("--f-h", f.height);
-
-          const stem = document.createElement("div");
-          stem.className = "fern-stem";
-
-          // Tạo 6 cặp lá nhỏ dọc cành dương xỉ
-          for (let i = 1; i <= 6; i++) {
-            const topPct = i * 13;
-            const leafL = document.createElement("div");
-            leafL.className = "fern-leaflet fern-leaflet--l";
-            leafL.style.top = `${topPct}%`;
-
-            const leafR = document.createElement("div");
-            leafR.className = "fern-leaflet fern-leaflet--r";
-            leafR.style.top = `${topPct + 3}%`;
-
-            stem.appendChild(leafL);
-            stem.appendChild(leafR);
-          }
-
-          fWrap.appendChild(stem);
-          fragment.appendChild(fWrap);
-        });
-
-        // 2. Cấu hình 16 Bông Hoa hội tụ từ nút thắt nơ (-36deg đến +36deg)
+        // Cấu hình 16 Bông Hoa hội tụ từ nút thắt nơ (-36deg đến +36deg)
         // Gồm: 6 Bông Hướng Dương (sunflower) + 10 Bông Cẩm Chướng & Hồng Cam Vàng / Hồng Phấn
         const bouquetFlowers = [
           // Tầng đỉnh & trung tâm (Hướng dương rực rỡ)
@@ -2346,7 +2309,8 @@
           flowerEl.style.setProperty("--tilt", `${cfg.tilt}deg`);
           flowerEl.style.setProperty("--stem-h", cfg.stem);
           flowerEl.style.setProperty("--bloom-scale", cfg.scale);
-          flowerEl.style.setProperty("--grow-delay", `${cfg.delay}s`);
+          // Đồng nhất thời điểm nở: mọi cành và cánh bắt đầu cùng lúc.
+          flowerEl.style.setProperty("--grow-delay", "0.2s");
           flowerEl.style.setProperty("--z", cfg.z);
           flowerEl.style.setProperty("--sway-anim", cfg.sway);
           flowerEl.style.setProperty("--sway-dur", `${(3.8 + (idx % 4) * 0.42).toFixed(2)}s`);
@@ -2480,6 +2444,14 @@
         `;
       }
 
+      function getLanternSubject(recipient) {
+        const subject = recipient
+          .replace(/^(Kính gửi|Gửi|Kính tặng|Kính chúc)\s+/i, "")
+          .replace(/\s+/g, " ")
+          .trim();
+        return subject ? subject.charAt(0).toUpperCase() + subject.slice(1) : recipient;
+      }
+
       /**
        * Thả 1 ngọn đèn tri ân lên bầu trời
        * @param {Object} opts - sender, recipient, message, theme, isCustom, depth ('far'|'mid'|'near'), initialBottomVh, initialLeftPct, incrementCounter
@@ -2526,7 +2498,7 @@
 
         const msgEl = document.createElement("div");
         msgEl.className = "lantern-ribbon__msg";
-        msgEl.textContent = `“${message}”`;
+        msgEl.textContent = getLanternSubject(recipient);
 
         const senderEl = document.createElement("div");
         senderEl.className = "lantern-ribbon__sender";
