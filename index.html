@@ -479,6 +479,10 @@
       transform: translateY(-2px);
     }
 
+    .mobile-label {
+      display: none;
+    }
+
     .lantern-counter-dot {
       width: 8px;
       height: 8px;
@@ -1651,6 +1655,155 @@
         max-height: 92vh;
       }
     }
+
+    @media (max-width: 600px) {
+      .hero-header {
+        top: 8px;
+        width: calc(100vw - 18px);
+      }
+
+      .hero-badge {
+        margin-bottom: 3px;
+        padding: 3px 9px;
+        max-width: 94vw;
+        font-size: 8.5px;
+        letter-spacing: 0.04em;
+      }
+
+      .hero-title {
+        font-size: clamp(1.18rem, 5.8vw, 1.55rem);
+        line-height: 1.08;
+      }
+
+      .hero-subtitle {
+        margin-top: 2px;
+        font-size: clamp(0.78rem, 3.8vw, 0.98rem);
+      }
+
+      .school-backdrop {
+        bottom: 12vh;
+        width: 118vw;
+      }
+
+      .school-svg {
+        --school-height-scale: 1.28;
+        height: clamp(210px, 32vh, 290px);
+        max-height: 44vh;
+      }
+
+      .bouquet-wrapper {
+        --bouquet-scale: 0.48;
+        height: 72vh;
+      }
+
+      .lanterns-layer {
+        z-index: 18;
+      }
+
+      .sky-lantern--far {
+        display: none;
+      }
+
+      .lantern-ribbon {
+        max-width: 112px;
+        padding: 3px 6px;
+        font-size: 9px;
+      }
+
+      .lantern-ribbon__msg {
+        font-size: 8.5px;
+      }
+
+      .mobile-label {
+        display: inline;
+      }
+
+      .desktop-label {
+        display: none;
+      }
+
+      .control-dock {
+        bottom: 8px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        width: calc(100vw - 12px);
+        max-width: none;
+        min-height: 86px;
+        padding: 5px;
+        gap: 4px;
+        border-radius: 13px;
+      }
+
+      .control-dock .status-pill,
+      .control-dock .btn-tribute {
+        width: 100%;
+        min-width: 0;
+        min-height: 36px;
+        justify-content: center;
+        padding: 6px 4px;
+        gap: 3px;
+        font-size: 9.5px;
+        white-space: normal;
+        text-align: center;
+        line-height: 1.12;
+      }
+
+      .control-dock .status-pill span,
+      .control-dock .btn-tribute span {
+        min-width: 0;
+      }
+
+      .floating-toast {
+        top: 118px;
+        max-height: 28vh;
+        overflow-y: auto;
+      }
+    }
+
+    @media (max-width: 600px) and (orientation: landscape), (max-height: 500px) {
+      .hero-header {
+        top: 5px;
+      }
+
+      .hero-badge {
+        display: none;
+      }
+
+      .hero-title {
+        font-size: 1.1rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.78rem;
+      }
+
+      .school-backdrop {
+        bottom: 5vh;
+        width: 94vw;
+      }
+
+      .school-svg {
+        --school-height-scale: 1.18;
+        height: clamp(150px, 42vh, 220px);
+      }
+
+      .bouquet-wrapper {
+        --bouquet-scale: 0.5;
+        height: 66vh;
+      }
+
+      .control-dock {
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        min-height: 48px;
+        bottom: 4px;
+      }
+
+      .control-dock .status-pill,
+      .control-dock .btn-tribute {
+        min-height: 38px;
+        font-size: 8.5px;
+      }
+    }
   </style>
 </head>
 
@@ -1925,31 +2078,37 @@
   <!-- Thanh action bar gọn bên dưới, gồm tương tác nhanh & số đèn tri ân -->
   <nav class="control-dock" aria-label="Bảng điều khiển tri ân 20/11">
     <button type="button" class="status-pill status-pill--interactive" id="school-pill-btn">
-      <span>🏫</span>
-      <span>Chạm ánh đèn mái trường</span>
+      <span aria-hidden="true">🏫</span>
+      <span class="desktop-label">Chạm ánh đèn mái trường</span>
+      <span class="mobile-label">Mái trường</span>
     </button>
     <div class="status-pill" title="Số đèn tri ân đang thắp sáng bầu trời">
-      <span class="lantern-counter-dot"></span>
-      <span>Đã thắp <strong id="lantern-count">18</strong> đèn tri ân</span>
+      <span class="lantern-counter-dot" aria-hidden="true"></span>
+      <span class="desktop-label">Đã thắp <strong id="lantern-count">18</strong> đèn tri ân</span>
+      <span class="mobile-label"><strong id="lantern-count-mobile">18</strong> đèn</span>
     </div>
     <button type="button" class="btn-tribute btn-tribute--primary" id="btn-auto-lantern">
-      <span>🏮</span>
-      <span>Thả Đèn Tri Ân</span>
+      <span aria-hidden="true">🏮</span>
+      <span class="desktop-label">Thả Đèn Tri Ân</span>
+      <span class="mobile-label">Thả đèn</span>
     </button>
 
     <button type="button" class="btn-tribute btn-tribute--create" id="btn-create-lantern">
-      <span>✍️</span>
-      <span>Tạo Đèn Tri Ân</span>
+      <span aria-hidden="true">✍️</span>
+      <span class="desktop-label">Tạo Đèn Tri Ân</span>
+      <span class="mobile-label">Tạo đèn</span>
     </button>
 
     <button type="button" class="btn-tribute" id="btn-open-letter">
-      <span>📜</span>
-      <span>Thư Tri Ân 20/11</span>
+      <span aria-hidden="true">📜</span>
+      <span class="desktop-label">Thư Tri Ân 20/11</span>
+      <span class="mobile-label">Thư 20/11</span>
     </button>
 
     <button type="button" class="btn-tribute btn-tribute--music" id="btn-toggle-music" aria-pressed="false">
-      <span id="music-icon">🎹</span>
-      <span id="music-label">Nhạc Nền Piano</span>
+      <span id="music-icon" aria-hidden="true">🎹</span>
+      <span class="desktop-label" id="music-label">Nhạc Nền Piano</span>
+      <span class="mobile-label">Piano</span>
     </button>
   </nav>
 
@@ -2456,6 +2615,7 @@
          ---------------------------------------------------------------------- */
       const lanternsLayer = document.getElementById("lanterns-layer");
       const lanternCountEl = document.getElementById("lantern-count");
+      const mobileLanternCountEl = document.getElementById("lantern-count-mobile");
       let totalLanternsReleased = 0;
       let autoWishCursor = 0;
 
@@ -2525,6 +2685,7 @@
         if (incrementCounter) {
           totalLanternsReleased += 1;
           lanternCountEl.textContent = totalLanternsReleased;
+          if (mobileLanternCountEl) mobileLanternCountEl.textContent = totalLanternsReleased;
         }
 
         const themeObj = LANTERN_THEMES[theme] || LANTERN_THEMES.amber;
@@ -2636,6 +2797,7 @@
         }
         totalLanternsReleased = 18;
         lanternCountEl.textContent = totalLanternsReleased;
+        if (mobileLanternCountEl) mobileLanternCountEl.textContent = totalLanternsReleased;
         autoWishCursor = 18;
       }
 
