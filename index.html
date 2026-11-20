@@ -1658,6 +1658,54 @@
     }
 
     @media (max-width: 600px) {
+      .flower__light,
+      .lantern-ribbon,
+      .lantern-flame,
+      .lantern-body-wrap,
+      .sky-lantern--far {
+        animation: none !important;
+      }
+
+      .lantern-ribbon,
+      .control-dock,
+      .status-pill,
+      .hero-badge,
+      .floating-toast,
+      .glass-card,
+      .modal-backdrop {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+
+      .lantern-ribbon,
+      .control-dock,
+      .status-pill,
+      .school-backdrop,
+      .hero-title,
+      .bouquet-wrap-back,
+      .bouquet-wrap-front,
+      .flower__leafs::after {
+        filter: none;
+        box-shadow: none;
+      }
+
+      .bouquet-wrapper,
+      .flower,
+      .flower__line,
+      .flower__leafs,
+      .bow-ribbon,
+      .bouquet-tag {
+        animation: none !important;
+      }
+
+      .moon,
+      .lantern-ribbon,
+      .control-dock,
+      .school-backdrop,
+      .bouquet-stage {
+        will-change: auto;
+      }
+
       .hero-header {
         top: 8px;
         width: calc(100vw - 18px);
@@ -1682,20 +1730,23 @@
       }
 
       .school-backdrop {
-        bottom: 37vh;
-        width: 146vw;
+        bottom: 24vh;
+        width: 118vw;
       }
 
       .school-svg {
-        --school-height-scale: 1.22;
-        height: clamp(300px, 43vh, 390px);
-        max-height: 52vh;
+        --school-height-scale: 1.12;
+        height: clamp(230px, 29vh, 300px);
+        max-height: 44vh;
       }
 
       .bouquet-wrapper {
-        --bouquet-scale: 0.72;
-        --bouquet-raise: -32vh;
-        height: 82vh;
+        height: 58vh;
+        --bouquet-scale: 0.64;
+        --bouquet-raise: -16vh;
+        animation: none;
+        transform: translateY(-16vh) scale(0.64);
+        transform-origin: bottom center;
       }
 
       .lanterns-layer {
@@ -1725,26 +1776,26 @@
       }
 
       .control-dock {
-        bottom: calc(15vh + env(safe-area-inset-bottom, 0px));
+        bottom: calc(10px + env(safe-area-inset-bottom, 0px));
         display: grid;
         grid-template-columns: repeat(3, minmax(0, 1fr));
         width: calc(100vw - 12px);
         max-width: none;
-        min-height: 86px;
-        padding: 5px;
-        gap: 4px;
-        border-radius: 13px;
+        min-height: 58px;
+        padding: 3px;
+        gap: 3px;
+        border-radius: 11px;
       }
 
       .control-dock .status-pill,
       .control-dock .btn-tribute {
         width: 100%;
         min-width: 0;
-        min-height: 36px;
+        min-height: 28px;
         justify-content: center;
-        padding: 6px 4px;
-        gap: 3px;
-        font-size: 9.5px;
+        padding: 4px 3px;
+        gap: 2px;
+        font-size: 8.5px;
         white-space: normal;
         text-align: center;
         line-height: 1.12;
@@ -1804,6 +1855,111 @@
       .control-dock .btn-tribute {
         min-height: 38px;
         font-size: 8.5px;
+      }
+    }
+
+    /* Màn hình điện thoại dọc: bố cục riêng, không chồng các vị trí desktop */
+    @media (max-width: 600px) and (orientation: portrait) {
+      .hero-header {
+        top: calc(8px + env(safe-area-inset-top, 0px));
+        width: calc(100vw - 16px);
+        z-index: 35;
+      }
+
+      .hero-badge {
+        margin-bottom: 2px;
+      }
+
+      .hero-title {
+        font-size: clamp(1.08rem, 5.2vw, 1.38rem);
+        line-height: 1.05;
+      }
+
+      .hero-subtitle {
+        margin-top: 1px;
+        font-size: clamp(0.72rem, 3.5vw, 0.92rem);
+      }
+
+      .school-backdrop {
+        bottom: 19vh;
+        width: 118vw;
+        z-index: 3;
+      }
+
+      .school-svg {
+        height: clamp(230px, 31vh, 300px);
+        max-height: 42vh;
+        --school-height-scale: 1.06;
+      }
+
+      .bouquet-stage {
+        z-index: 12;
+      }
+
+      .bouquet-wrapper {
+        position: absolute;
+        left: 50%;
+        bottom: 92px;
+        height: 390px;
+        width: 520px;
+        --bouquet-scale: 0.62;
+        --bouquet-raise: 0px;
+        animation: none;
+        transform: translateX(-50%) scale(0.62);
+        transform-origin: bottom center;
+      }
+
+      .flowers-cluster {
+        z-index: 14;
+        overflow: visible;
+      }
+
+      .bouquet-wrap-back,
+      .bouquet-wrap-front {
+        z-index: 8;
+      }
+
+      .bouquet-wrap-front {
+        z-index: 22;
+        opacity: 0.82;
+      }
+
+      .bouquet-bow {
+        z-index: 26;
+      }
+
+      .flower {
+        pointer-events: auto;
+      }
+
+      .lanterns-layer {
+        z-index: 20;
+      }
+
+      .sky-lantern--mid {
+        margin-top: -4px;
+      }
+
+      .sky-lantern--near .lantern-ribbon {
+        max-width: 92px;
+      }
+
+      .control-dock {
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        width: calc(100vw - 16px);
+        min-height: 54px;
+        padding: 3px;
+        gap: 2px;
+        border-radius: 10px;
+        z-index: 50;
+      }
+
+      .control-dock .status-pill,
+      .control-dock .btn-tribute {
+        min-height: 26px;
+        height: 26px;
+        font-size: 8px;
+        padding: 3px 2px;
       }
     }
   </style>
@@ -2541,15 +2697,16 @@
 
           if (isSunflower) {
             leafsWrap.style.setProperty("--aura-color", "#ffd54f");
-            for (let p = 0; p < 12; p++) {
+            const petalCount = 12;
+            for (let p = 0; p < petalCount; p++) {
               const petalOuter = document.createElement("div");
               petalOuter.className = "sunflower-petal";
-              petalOuter.style.setProperty("--r", `${p * 30}deg`);
+              petalOuter.style.setProperty("--r", `${p * (360 / petalCount)}deg`);
               leafsWrap.appendChild(petalOuter);
 
               const petalInner = document.createElement("div");
               petalInner.className = "sunflower-petal sunflower-petal--inner";
-              petalInner.style.setProperty("--r", `${p * 30}deg`);
+              petalInner.style.setProperty("--r", `${p * (360 / petalCount)}deg`);
               leafsWrap.appendChild(petalInner);
             }
             const core = document.createElement("div");
@@ -2579,7 +2736,8 @@
           }
 
           // Đom đóm phát sáng bay lên từ mỗi bông hoa
-          for (let f = 1; f <= 6; f++) {
+          const lightCount = 6;
+          for (let f = 1; f <= lightCount; f++) {
             const light = document.createElement("div");
             light.className = `flower__light flower__light--${f}`;
             leafsWrap.appendChild(light);
@@ -2679,7 +2837,8 @@
         incrementCounter = true
       }) {
         // Giới hạn tối đa ~32 đèn trên màn hình để giữ 60fps mượt mà
-        if (lanternsLayer.children.length >= 32) {
+        const lanternLimit = 32;
+        if (lanternsLayer.children.length >= lanternLimit) {
           const oldest = lanternsLayer.querySelector(".sky-lantern:not(.sky-lantern--custom)");
           if (oldest) oldest.remove();
         }
@@ -2776,7 +2935,7 @@
       function initInitialSkyLanterns() {
         const themeKeys = Object.keys(LANTERN_THEMES);
         const depths = ["far", "mid", "near", "far", "mid", "near"];
-        const initialLanternCount = window.innerWidth <= 600 ? 12 : 18;
+        const initialLanternCount = 18;
 
         for (let i = 0; i < initialLanternCount; i++) {
           const wish = AUTO_WISHES[i % AUTO_WISHES.length];
@@ -3082,13 +3241,23 @@
       let particles = [];
 
       function resizeCanvas() {
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        const isMobileDevice = window.matchMedia("(max-width: 600px)").matches;
+        const pixelRatio = isMobileDevice ? 1 : Math.min(window.devicePixelRatio || 1, 2);
+        canvas.width = Math.floor(window.innerWidth * pixelRatio);
+        canvas.height = Math.floor(window.innerHeight * pixelRatio);
+        canvas.style.width = `${window.innerWidth}px`;
+        canvas.style.height = `${window.innerHeight}px`;
+        ctx.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
       }
       window.addEventListener("resize", resizeCanvas);
       resizeCanvas();
 
       function spawnBurstParticles(x, y, count = 20, color = "#ffd54f") {
+        if (window.matchMedia("(max-width: 600px)").matches) {
+          count = Math.min(count, 8);
+          if (particles.length >= 20) return;
+        }
+        count = Math.min(count, 36 - particles.length);
         for (let i = 0; i < count; i++) {
           const angle = Math.random() * Math.PI * 2;
           const speed = Math.random() * 2.8 + 0.6;
@@ -3127,6 +3296,7 @@
       window.addEventListener(
         "touchmove",
         (e) => {
+          if (window.matchMedia("(max-width: 600px)").matches) return;
           if (e.touches && e.touches[0]) {
             handlePointerMove(e.touches[0].clientX, e.touches[0].clientY);
           }
@@ -3135,6 +3305,11 @@
       );
 
       function renderParticles() {
+        if (window.matchMedia("(max-width: 600px)").matches && particles.length === 0) {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          requestAnimationFrame(renderParticles);
+          return;
+        }
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
         for (let i = particles.length - 1; i >= 0; i--) {
